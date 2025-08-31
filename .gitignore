@@ -1,0 +1,28 @@
+# Ignore environment folders
+.env
+
+# Ignore model files
+*.pt
+*.bin
+*tokenizer.json
+*vocab.txt
+
+# unused data
+mrl_eval_data/ar_xlsum/
+mrl_eval_data/arabic_nli/
+mrl_eval_data/arcoref/
+mrl_eval_data/arq_MSA/
+mrl_eval_data/arq_MSA_question_gen/
+mrl_eval_data/arq_spoken/
+mrl_eval_data/arq_spoken_question_gen/
+mrl_eval_data/arsentiment/
+mrl_eval_data/artydiqa/
+mrl_eval_data/artydiqa_question_gen/
+mrl_eval_data/hebco/
+mrl_eval_data/hebsummaries/
+mrl_eval_data/heq/
+mrl_eval_data/heq_question_gen/
+mrl_eval_data/hesentiment/
+mrl_eval_data/hesum/
+mrl_eval_data/iahlt_ner/
+mrl_eval_data/nemo/
