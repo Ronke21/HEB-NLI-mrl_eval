@@ -1,1 +1,4 @@
 
+[submodule "mrl_eval"]
+	path = mrl_eval
+	url = https://github.com/Ronke21/HEB-NLI-mrl_eval/
