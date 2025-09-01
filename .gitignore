@@ -6,6 +6,7 @@
 *.bin
 *tokenizer.json
 *vocab.txt
+*.safetensors
 
 # unused data
 mrl_eval_data/ar_xlsum/
