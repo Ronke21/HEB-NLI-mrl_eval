@@ -4,11 +4,13 @@
 # CUDA_VISIBLE_DEVICES=0 python -m mrl_eval.hf.finetune --dataset hebnli 2>&1 | tee mrl_log_mt5_xl.txt
 # CUDA_VISIBLE_DEVICES=3 python -m mrl_eval.hf.finetune --dataset hebnli --model "onlplab/alephbert-base" 2>&1 | tee mrl_log_alephbert.txt
 # CUDA_VISIBLE_DEVICES=4 python -m mrl_eval.hf.finetune --dataset hebnli --model "dicta-il/dictabert" 2>&1 | tee mrl_log_dictabert.txt
-
 # CUDA_VISIBLE_DEVICES=0 python -m mrl_eval.hf.finetune --dataset hebnli --model "google/gemma-2-2b" 2>&1 | tee mrl_log_gemma2_2b.txt
-# CUDA_VISIBLE_DEVICES=1 python -m mrl_eval.hf.finetune --dataset hebnli --model "google/gemma-2-9b" 2>&1 | tee mrl_log_gemma2_9b.txt
+
 # CUDA_VISIBLE_DEVICES=2 python -m mrl_eval.hf.finetune --dataset hebnli --model "google/gemma-3-4b-it" 2>&1 | tee mrl_log_gemma3_4b.txt
-# CUDA_VISIBLE_DEVICES=3 python -m mrl_eval.hf.finetune --dataset hebnli --model "google/gemma-3-12b-it" 2>&1 | tee mrl_log_gemma3_12b.txt
+
+# ####MUCH FASTER:
+# CUDA_VISIBLE_DEVICES=0,1,2 NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1 torchrun --nproc_per_node=3 --master_port=29501 -m mrl_eval.hf.finetune --dataset hebnli --model "google/gemma-2-9b" 2>&1 | tee mrl_log_gemma2_9b.txt
+# CUDA_VISIBLE_DEVICES=3,4,5 NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1 torchrun --nproc_per_node=3 --master_port=29500 -m mrl_eval.hf.finetune --dataset hebnli --model "google/gemma-3-12b-it" 2>&1 | tee mrl_log_gemma3_12b.txt
 
 # coding=utf-8
 # Copyright 2025 The Google Research Authors.
@@ -51,6 +53,8 @@ from mrl_eval.hf.datasets.dataset_factory import hf_dataset_factory
 
 import torch
 # Helpful: increase recompile/cachesize limit to avoid quick failures
+import os
+os.environ["TORCH_LOGS"] = "recompiles"
 torch._dynamo.config.recompile_limit = 64
 torch._dynamo.config.cache_size_limit = 4096
 
@@ -169,7 +173,7 @@ class DecoderEvalAndSaveCallback(transformers.TrainerCallback):
       input_ids = batch["input_ids"].to(self.trainer.model.device)
       attention_mask = batch["attention_mask"].to(self.trainer.model.device)
       with torch.inference_mode():
-        with torch._dynamo.disable():    
+        # with torch._dynamo.disable():    
             output_ids = self.trainer.model.generate(  # pytype: disable=attribute-error
                 input_ids,
                 attention_mask=attention_mask,
@@ -314,6 +318,7 @@ def _get_train_config_encoder_decoder(
       "logging_dir": f"{output_dir}/logs",
       "gradient_accumulation_steps": 16,
       "save_only_model": True,
+      "resume_from_checkpoint": True,
   }
 
   for key in TASKS_CONFIGS[task]:
@@ -340,7 +345,9 @@ def _get_train_config_decoder_only(
       "learning_rate": 1e-5,
       "eval_steps": 0.33,
       "save_total_limit": 1,
-      "save_strategy": "no",
+    #   "save_strategy": "no",
+      "save_strategy": "steps",
+      "save_steps": 500,
       "lr_scheduler_type": "linear",
       "warmup_ratio": 0.1,
       "auto_find_batch_size": True,
@@ -352,6 +359,7 @@ def _get_train_config_decoder_only(
       "optim": "adamw_torch",
       "bf16": True,
       "bf16_full_eval": True,
+      "resume_from_checkpoint": True,
   }
 
   for key in TASKS_CONFIGS[task]:
