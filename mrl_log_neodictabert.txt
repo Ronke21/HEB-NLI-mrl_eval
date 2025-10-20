@@ -1,0 +1,39 @@
+2025-10-20 22:40:04.151716: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-10-20 22:40:39.380195: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2025-10-20 22:42:00.121025: W tensorflow/core/common_runtime/gpu/gpu_device.cc:2251] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+['/home/nlp/ronke21/heb_nli_mrl_eval/mrl_eval/hf/finetune.py']
+The repository dicta-il/neodictabert contains custom code which must be executed to correctly load the model. You can inspect the repository content at https://hf.co/dicta-il/neodictabert .
+ You can inspect the repository content at https://hf.co/dicta-il/neodictabert.
+You can avoid this prompt in future by passing the argument `trust_remote_code=True`.
+
+Do you wish to run the custom code? [y/N] Traceback (most recent call last):
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/site-packages/transformers/dynamic_module_utils.py", line 723, in resolve_trust_remote_code
+    answer = input(
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/site-packages/transformers/dynamic_module_utils.py", line 662, in _raise_timeout_error
+    raise ValueError(
+ValueError: Loading this model requires you to execute custom code contained in the model repository on your local machine. Please set the option `trust_remote_code=True` to permit loading of this model.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/nlp/ronke21/heb_nli_mrl_eval/mrl_eval/hf/finetune.py", line 691, in <module>
+    app.run(main)
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/site-packages/absl/app.py", line 316, in run
+    _run_main(main, args)
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/site-packages/absl/app.py", line 261, in _run_main
+    sys.exit(main(argv))
+  File "/home/nlp/ronke21/heb_nli_mrl_eval/mrl_eval/hf/finetune.py", line 664, in main
+    model_config = transformers.AutoConfig.from_pretrained(model)
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/site-packages/transformers/models/auto/configuration_auto.py", line 1259, in from_pretrained
+    trust_remote_code = resolve_trust_remote_code(
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/site-packages/transformers/dynamic_module_utils.py", line 735, in resolve_trust_remote_code
+    raise ValueError(
+ValueError: The repository dicta-il/neodictabert contains custom code which must be executed to correctly load the model. You can inspect the repository content at https://hf.co/dicta-il/neodictabert .
+ You can inspect the repository content at https://hf.co/dicta-il/neodictabert.
+Please pass the argument `trust_remote_code=True` to allow custom code to be run.

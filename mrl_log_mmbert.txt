@@ -1,0 +1,241 @@
+2025-10-20 22:40:04.151560: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-10-20 22:40:39.380192: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2025-10-20 22:41:59.749962: W tensorflow/core/common_runtime/gpu/gpu_device.cc:2251] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+['/home/nlp/ronke21/heb_nli_mrl_eval/mrl_eval/hf/finetune.py']
+RONKE Model config: ModernBertConfig {
+  "architectures": [
+    "ModernBertForMaskedLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "bos_token_id": 2,
+  "classifier_activation": "gelu",
+  "classifier_bias": false,
+  "classifier_dropout": 0.0,
+  "classifier_pooling": "mean",
+  "cls_token_id": 1,
+  "decoder_bias": true,
+  "deterministic_flash_attn": false,
+  "embedding_dropout": 0.0,
+  "eos_token_id": 1,
+  "global_attn_every_n_layers": 3,
+  "global_rope_theta": 160000,
+  "gradient_checkpointing": false,
+  "hidden_activation": "gelu",
+  "hidden_size": 768,
+  "initializer_cutoff_factor": 2.0,
+  "initializer_range": 0.02,
+  "intermediate_size": 1152,
+  "layer_norm_eps": 1e-05,
+  "local_attention": 128,
+  "local_rope_theta": 160000,
+  "mask_token_id": 4,
+  "max_position_embeddings": 8192,
+  "mlp_bias": false,
+  "mlp_dropout": 0.0,
+  "model_type": "modernbert",
+  "norm_bias": false,
+  "norm_eps": 1e-05,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 22,
+  "pad_token_id": 0,
+  "position_embedding_type": "sans_pos",
+  "repad_logits_with_grad": false,
+  "sep_token_id": 1,
+  "sparse_pred_ignore_index": -100,
+  "sparse_prediction": false,
+  "torch_dtype": "float32",
+  "transformers_version": "4.55.4",
+  "vocab_size": 256000
+}
+
+====================================================================================================
+Model args:
+ModelArguments(model_name_or_path='jhu-clsp/mmBERT-base', cache_dir=None)
+====================================================================================================
+Data args:
+DataArguments(task_name=None, max_inputs_length=250, max_targets_length=5, max_train_samples=None, load_train=True, load_validation=True, load_test=False)
+====================================================================================================
+Training args:
+TrainingArguments(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 
+'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=True,
+average_tokens_across_devices=False,
+batch_eval_metrics=False,
+bf16=True,
+bf16_full_eval=True,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=True,
+do_predict=False,
+do_train=True,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=0.33,
+eval_strategy=steps,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=16,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs=None,
+greater_is_better=True,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_revision=None,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=1e-05,
+length_column_name=length,
+liger_kernel_config=None,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=output/mmBERT-base_hebnli/logs,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=20,
+logging_strategy=steps,
+lr_scheduler_kwargs={},
+lr_scheduler_type=linear,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=macro_f1,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=5,
+optim=adamw_torch,
+optim_args=None,
+optim_target_modules=None,
+output_dir=output/mmBERT-base_hebnli,
+overwrite_output_dir=False,
+past_index=-1,
+per_device_eval_batch_size=32,
+per_device_train_batch_size=8,
+prediction_loss_only=False,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=True,
+report_to=[],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=True,
+run_name=None,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=500,
+save_strategy=steps,
+save_total_limit=1,
+seed=42,
+skip_memory_metrics=True,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_mps_device=False,
+warmup_ratio=0.1,
+warmup_steps=0,
+weight_decay=0.0,
+)
+Detected decoder-only model, training with LORA.
+Read 300067 samples from mrl_eval_data/hebnli/jsonl/train.jsonl
+Preprocessing samples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:02
+Tokenizing samples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:01:47
+Read 1999 samples from mrl_eval_data/hebnli/jsonl/val.jsonl
+Preprocessing samples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Tokenizing samples ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+==================================================
+First training sample:
+id: 24413n
+inputs: משפט 1: אז בכל מקרה, אולי הוא ישים את ווילי הורטון הזה על הכרטיס אחרי הכול. משפט 2: לא הרבה אנשים יודעים מי זה ווילי הורטון. 
+targets:  ניטרלי
+input_ids: tensor([     2,  29800,  73457, 235248, 235274, 235292,  97473,  96680,  45180,
+         43066, 235269,   4207,  78531,  39512,  34571,   4472,  15207, 204959,
+          9556, 208904, 235818,  13134, 110452,  19487,  62043,  59073,  30352,
+        138671,   2969,  49011, 235265,  29800,  73457, 235248, 235284, 235292,
+         18443, 166945, 200915, 160567,  76577,  58325,  34587, 204959,   9556,
+        208904, 235818,  13134, 235265, 235248,      1,  43774,  10358, 235292,
+         52156,  54040,   9556,      1])
+labels: tensor([ -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+         -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+         -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+         -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+         -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,  -100,
+         -100,  -100,  -100,  -100, 52156, 54040,  9556,     1])
+attention_mask: tensor([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+Traceback (most recent call last):
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/nlp/ronke21/heb_nli_mrl_eval/mrl_eval/hf/finetune.py", line 691, in <module>
+    app.run(main)
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/site-packages/absl/app.py", line 316, in run
+    _run_main(main, args)
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/site-packages/absl/app.py", line 261, in _run_main
+    sys.exit(main(argv))
+  File "/home/nlp/ronke21/heb_nli_mrl_eval/mrl_eval/hf/finetune.py", line 685, in main
+    finetune_decoder_only(
+  File "/home/nlp/ronke21/heb_nli_mrl_eval/mrl_eval/hf/finetune.py", line 477, in finetune_decoder_only
+    model = transformers.AutoModelForCausalLM.from_pretrained(
+  File "/home/nlp/ronke21/.conda/envs/heb_nli_mrl_eval/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 603, in from_pretrained
+    raise ValueError(
+ValueError: Unrecognized configuration class <class 'transformers.models.modernbert.configuration_modernbert.ModernBertConfig'> for this kind of AutoModel: AutoModelForCausalLM.
+Model type should be one of ArceeConfig, AriaTextConfig, BambaConfig, BartConfig, BertConfig, BertGenerationConfig, BigBirdConfig, BigBirdPegasusConfig, BioGptConfig, BitNetConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CamembertConfig, LlamaConfig, CodeGenConfig, CohereConfig, Cohere2Config, CpmAntConfig, CTRLConfig, Data2VecTextConfig, DbrxConfig, DeepseekV2Config, DeepseekV3Config, DiffLlamaConfig, DogeConfig, Dots1Config, ElectraConfig, Emu3Config, ErnieConfig, Ernie4_5Config, Ernie4_5_MoeConfig, Exaone4Config, FalconConfig, FalconH1Config, FalconMambaConfig, FuyuConfig, GemmaConfig, Gemma2Config, Gemma3Config, Gemma3TextConfig, Gemma3nConfig, Gemma3nTextConfig, GitConfig, GlmConfig, Glm4Config, Glm4MoeConfig, GotOcr2Config, GPT2Config, GPT2Config, GPTBigCodeConfig, GPTNeoConfig, GPTNeoXConfig, GPTNeoXJapaneseConfig, GptOssConfig, GPTJConfig, GraniteConfig, GraniteMoeConfig, GraniteMoeHybridConfig, GraniteMoeSharedConfig, HeliumConfig, JambaConfig, JetMoeConfig, Lfm2Config, LlamaConfig, Llama4Config, Llama4TextConfig, MambaConfig, Mamba2Config, MarianConfig, MBartConfig, MegaConfig, MegatronBertConfig, MiniMaxConfig, MistralConfig, MixtralConfig, MllamaConfig, ModernBertDecoderConfig, MoshiConfig, MptConfig, MusicgenConfig, MusicgenMelodyConfig, MvpConfig, NemotronConfig, OlmoConfig, Olmo2Config, OlmoeConfig, OpenLlamaConfig, OpenAIGPTConfig, OPTConfig, PegasusConfig, PersimmonConfig, PhiConfig, Phi3Config, Phi4MultimodalConfig, PhimoeConfig, PLBartConfig, ProphetNetConfig, QDQBertConfig, Qwen2Config, Qwen2MoeConfig, Qwen3Config, Qwen3MoeConfig, RecurrentGemmaConfig, ReformerConfig, RemBertConfig, RobertaConfig, RobertaPreLayerNormConfig, RoCBertConfig, RoFormerConfig, RwkvConfig, SmolLM3Config, Speech2Text2Config, StableLmConfig, Starcoder2Config, TransfoXLConfig, TrOCRConfig, WhisperConfig, XGLMConfig, XLMConfig, XLMProphetNetConfig, XLMRobertaConfig, XLMRobertaXLConfig, XLNetConfig, xLSTMConfig, XmodConfig, ZambaConfig, Zamba2Config.
+Training with attention implementation: eager
