@@ -4,13 +4,12 @@
 # CUDA_VISIBLE_DEVICES=0 python -m mrl_eval.hf.finetune --dataset hebnli 2>&1 | tee mrl_log_mt5_xl.txt
 # CUDA_VISIBLE_DEVICES=3 python -m mrl_eval.hf.finetune --dataset hebnli --model "onlplab/alephbert-base" 2>&1 | tee mrl_log_alephbert.txt
 # CUDA_VISIBLE_DEVICES=4 python -m mrl_eval.hf.finetune --dataset hebnli --model "dicta-il/dictabert" 2>&1 | tee mrl_log_dictabert.txt
-# CUDA_VISIBLE_DEVICES=0 python -m mrl_eval.hf.finetune --dataset hebnli --model "google/gemma-2-2b" 2>&1 | tee mrl_log_gemma2_2b.txt
 
-# CUDA_VISIBLE_DEVICES=2 python -m mrl_eval.hf.finetune --dataset hebnli --model "google/gemma-3-4b-it" 2>&1 | tee mrl_log_gemma3_4b.txt
+# CUDA_VISIBLE_DEVICES=1 python -m mrl_eval.hf.finetune --dataset hebnli --model "google-bert/bert-base-multilingual-cased" 2>&1 | tee mrl_log_multilingualbert.txt
+# CUDA_VISIBLE_DEVICES=2 python -m mrl_eval.hf.finetune --dataset hebnli --model "jhu-clsp/mmBERT-base" 2>&1 | tee mrl_log_mmbert.txt
+# CUDA_VISIBLE_DEVICES=3 python -m mrl_eval.hf.finetune --dataset hebnli --model "dicta-il/neodictabert" 2>&1 | tee mrl_log_neodictabert.txt
 
-# ####MUCH FASTER:
-# CUDA_VISIBLE_DEVICES=0,1,2 NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1 torchrun --nproc_per_node=3 --master_port=29501 -m mrl_eval.hf.finetune --dataset hebnli --model "google/gemma-2-9b" 2>&1 | tee mrl_log_gemma2_9b.txt
-# CUDA_VISIBLE_DEVICES=3,4,5 NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1 torchrun --nproc_per_node=3 --master_port=29500 -m mrl_eval.hf.finetune --dataset hebnli --model "google/gemma-3-12b-it" 2>&1 | tee mrl_log_gemma3_12b.txt
+
 
 # coding=utf-8
 # Copyright 2025 The Google Research Authors.
@@ -274,7 +273,9 @@ class DecoderEvalAndSaveCallback(transformers.TrainerCallback):
         self.best_checkpoint = self.trainer.state.global_step  # pytype: disable=attribute-error
         self.best_metric = decision_metric
         # save the best checkpoint
-        save_path = pathlib.Path(self.output_dir) / str(self.best_checkpoint)
+        # save_path = pathlib.Path(self.output_dir) / str(self.best_checkpoint)
+        save_path = pathlib.Path(self.output_dir) / f"best-{self.best_checkpoint}"
+
         print(f"Saving new best checkpoint at {save_path}")
         self.trainer.model.save_pretrained(save_path)  # pytype: disable=attribute-error
         self.trainer.processing_class.save_pretrained(save_path)  # pytype: disable=attribute-error # pylint: disable=unreachable
