@@ -123,7 +123,7 @@ class DecoderEvalAndSaveCallback(transformers.TrainerCallback):
     self.dataset = dataset
     self.trainer = trainer
     self.gen_config = transformers.GenerationConfig.from_pretrained(
-        trainer.model.name_or_path, max_new_tokens=max_new_tokens  # pytype: disable=attribute-error
+        trainer.model.name_or_path, max_new_tokens=max_new_tokens , trust_remote_code=True # pytype: disable=attribute-error
     )
     self.num_print_samples = num_print_samples
     self.metric_for_best_model = metric_for_best_model
@@ -398,11 +398,11 @@ def finetune_encoder_decoder(train_config: TrainConfig) -> None:
   """Finetune an encoder-decoder model."""
 
   model = transformers.AutoModelForSeq2SeqLM.from_pretrained(
-      train_config.model_args.model_name_or_path
+      train_config.model_args.model_name_or_path, trust_remote_code=True
   )
 
   tokenizer = transformers.AutoTokenizer.from_pretrained(
-      train_config.model_args.model_name_or_path, use_fast=_FAST_TOKENIZER.value
+      train_config.model_args.model_name_or_path, use_fast=_FAST_TOKENIZER.value, trust_remote_code=True
   )
 
   dataset = hf_dataset_factory(
@@ -442,7 +442,7 @@ def finetune_decoder_only(
   print("Detected decoder-only model, training with LORA.")
 
   tokenizer = transformers.AutoTokenizer.from_pretrained(
-      train_config.model_args.model_name_or_path, use_fast=_FAST_TOKENIZER.value
+      train_config.model_args.model_name_or_path, use_fast=_FAST_TOKENIZER.value, trust_remote_code=True
   )
 
   tokenizer.padding_side = "right"
@@ -477,7 +477,7 @@ def finetune_decoder_only(
   model = transformers.AutoModelForCausalLM.from_pretrained(
       train_config.model_args.model_name_or_path,
       attn_implementation=attn_implementation,
-      torch_dtype=torch.bfloat16,
+      torch_dtype=torch.bfloat16, trust_remote_code=True
   )
 
   lora_config = peft.LoraConfig(
@@ -537,11 +537,11 @@ def finetune_encoder(train_config: TrainConfig) -> None:
     
     model = transformers.AutoModelForSequenceClassification.from_pretrained(
         train_config.model_args.model_name_or_path,
-        num_labels=num_labels,
+        num_labels=num_labels, trust_remote_code=True
     )
 
     tokenizer = transformers.AutoTokenizer.from_pretrained(
-        train_config.model_args.model_name_or_path, use_fast=_FAST_TOKENIZER.value
+        train_config.model_args.model_name_or_path, use_fast=_FAST_TOKENIZER.value, trust_remote_code=True
     )
 
     dataset = hf_dataset_factory(
@@ -661,7 +661,7 @@ def main(argv: Sequence[str]):
 
   transformers.set_seed(_SEED.value)
 
-  model_config = transformers.AutoConfig.from_pretrained(model)
+  model_config = transformers.AutoConfig.from_pretrained(model, trust_remote_code=True)
   print(f"RONKE Model config: {model_config}")
 
   if model_config.is_encoder_decoder:
@@ -671,7 +671,7 @@ def main(argv: Sequence[str]):
     _print_args(train_config)
     finetune_encoder_decoder(train_config)
 
-  elif model_config.model_type in ["bert", "roberta"]:  # encoder-only
+  elif model_config.model_type in ["bert", "roberta", "modernbert"]:  # encoder-only
     # encoder-only (bert, roberta, alephbert, electra, etc.)
     train_config = _get_train_config_encoder_decoder(task, model, output_dir)
     _print_args(train_config)
