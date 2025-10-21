@@ -7,9 +7,10 @@
 
 # CUDA_VISIBLE_DEVICES=1 python -m mrl_eval.hf.finetune --dataset hebnli --model "google-bert/bert-base-multilingual-cased" 2>&1 | tee mrl_log_multilingualbert.txt
 # CUDA_VISIBLE_DEVICES=2 python -m mrl_eval.hf.finetune --dataset hebnli --model "jhu-clsp/mmBERT-base" 2>&1 | tee mrl_log_mmbert.txt
+
+# CUDA_VISIBLE_DEVICES=5 python -m mrl_eval.hf.finetune --dataset hebnli --model "FacebookAI/xlm-roberta-large" 2>&1 | tee mrl_log_xlmrobertalarge.txt
+# CUDA_VISIBLE_DEVICES=6 python -m mrl_eval.hf.finetune --dataset hebnli --model "intfloat/multilingual-e5-large" 2>&1 | tee mrl_log_me5large.txt
 # CUDA_VISIBLE_DEVICES=3 python -m mrl_eval.hf.finetune --dataset hebnli --model "dicta-il/neodictabert" 2>&1 | tee mrl_log_neodictabert.txt
-
-
 
 # coding=utf-8
 # Copyright 2025 The Google Research Authors.
@@ -671,7 +672,7 @@ def main(argv: Sequence[str]):
     _print_args(train_config)
     finetune_encoder_decoder(train_config)
 
-  elif model_config.model_type in ["bert", "roberta", "modernbert"]:  # encoder-only
+  elif model_config.model_type in ["bert", "roberta", "modernbert", "neobert"]:  # encoder-only
     # encoder-only (bert, roberta, alephbert, electra, etc.)
     train_config = _get_train_config_encoder_decoder(task, model, output_dir)
     _print_args(train_config)
