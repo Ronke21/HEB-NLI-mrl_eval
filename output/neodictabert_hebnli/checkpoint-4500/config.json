@@ -1,0 +1,61 @@
+{
+  "architectures": [
+    "NeoBERTForSequenceClassification"
+  ],
+  "auto_map": {
+    "AutoConfig": "modeling_neobert.NeoBERTConfig",
+    "AutoModel": "modeling_neobert.NeoBERT",
+    "AutoModelForMaskedLM": "modeling_neobert.NeoBERTLMHead",
+    "AutoModelForQuestionAnswering": "modeling_neobert.NeoBERTForQuestionAnswering",
+    "AutoModelForSequenceClassification": "modeling_neobert.NeoBERTForSequenceClassification",
+    "AutoModelForTokenClassification": "modeling_neobert.NeoBERTForTokenClassification"
+  },
+  "decoder_init_range": 0.02,
+  "dim_head": 64,
+  "embedding_init_range": 0.02,
+  "encoder_init_range": 0.02,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2"
+  },
+  "intermediate_size": 3072,
+  "kwargs": {
+    "architectures": [
+      "NeoBERTLMHead"
+    ],
+    "attn_implementation": null,
+    "auto_map": {
+      "AutoConfig": "modeling_neobert.NeoBERTConfig",
+      "AutoModel": "modeling_neobert.NeoBERT",
+      "AutoModelForMaskedLM": "modeling_neobert.NeoBERTLMHead",
+      "AutoModelForQuestionAnswering": "modeling_neobert.NeoBERTForQuestionAnswering",
+      "AutoModelForSequenceClassification": "modeling_neobert.NeoBERTForSequenceClassification",
+      "AutoModelForTokenClassification": "modeling_neobert.NeoBERTForTokenClassification"
+    },
+    "decoder_init_range": 0.02,
+    "dim_head": 64,
+    "kwargs": {
+      "decoder_init_range": 0.02
+    },
+    "model_type": "neobert",
+    "torch_dtype": "bfloat16",
+    "transformers_version": "4.53.0"
+  },
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_2": 2
+  },
+  "max_length": 4096,
+  "model_type": "neobert",
+  "norm_eps": 1e-06,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 28,
+  "pad_token_id": 3,
+  "problem_type": "single_label_classification",
+  "torch_dtype": "float32",
+  "transformers_version": "4.55.4",
+  "vocab_size": 128000
+}
